@@ -1,3 +1,4 @@
+var total = 0;
 var food = [
     { type: "cola", price: 100 },
     { type: "chips", price: 50 },
@@ -6,17 +7,17 @@ var food = [
 
 function chooseFood(food) {
     console.log("You chose " + food.type + " and you owe " + food.price);
+    total = food.price;
 }
+
 chooseFood(food[0]);
 
-var total = 0;
-
 function insertCoin(coin) {
-
     if (coin === 25 || coin === 10 || coin === 5) {
-        console.log(total += coin);
+        total = total -= coin;
+        console.log("You still owe: " + total);
     } else {
-        console.log("Please enter a valid coin. Here is your coin back.");
+        console.log("Please enter a valid coin.");
     }
 }
 
