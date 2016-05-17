@@ -1,14 +1,27 @@
 var total = 0;
 var acceptedCoins = [];
 var food = [
-    { type: "cola", price: 100 },
-    { type: "chips", price: 50 },
-    { type: "candy", price: 65 }
+    { type: "cola", price: 100, quantity: 2 },
+    { type: "chips", price: 50, quantity: 5 },
+    { type: "candy", price: 65, quantity: 0 }
 ];
 
 function chooseFood(food) {
-    console.log("You chose " + food.type + " and you owe " + food.price);
-    total = food.price;
+    if (food.quantity <= 0) {
+        console.log(food.type + " is SOLD OUT. Please make another selection.");
+    } else {
+        food.quantity = food.quantity - 1;
+        console.log("There is " + food.quantity + " " + food.type + " left.");
+        console.log("You chose " + food.type + " and you owe " + food.price);
+        total = food.price;
+    }
+}
+
+function soldOut() {
+    console.log("soldOut");
+    if (food.quantity < 0) {
+        console.log("SOLD OUT. Please make another selection.");
+    }
 }
 
 function insertCoin(coin) {
@@ -28,24 +41,31 @@ function metTotal() {
     } else if (total < 0) {
         total = Math.abs(total);
         console.log("Here is your change: " + total);
+        acceptedCoins = [];
+        total = 0;
     } else {
         console.log("Thank you! Enjoy your snack!");
     }
 }
 
 function returnCoins() {
-    console.log("Returning Coins");
-    for (i = 0; i < acceptedCoins.length; i++) {
-        console.log("Here is your coin back: " + acceptedCoins[i]);
+    if (acceptedCoins === []) {
+        console.log("INSERT COIN");
+    } else {
+        console.log("Returning Coins");
+        for (i = 0; i < acceptedCoins.length; i++) {
+            console.log("Here is your coin back: " + acceptedCoins[i]);
+        }
+        acceptedCoins = [];
+        total = 0;
+        console.log(acceptedCoins);
+        console.log("Please make a selection.");
+        console.log("INSERT COIN");
     }
-    acceptedCoins = [];
-    total = 0;
-    console.log(acceptedCoins);
-    console.log("Please make a selection.");
-    console.log("INSERT COIN");
 }
 
-chooseFood(food[0]);
+chooseFood(food[2]);
+chooseFood(food[1]);
 
 insertCoin(25);
 insertCoin(10);
@@ -56,6 +76,6 @@ insertCoin(25);
 
 returnCoins();
 
-chooseFood(food[2]);
+chooseFood(food[0]);
 
 insertCoin(5);
