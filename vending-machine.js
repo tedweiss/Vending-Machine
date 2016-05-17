@@ -17,21 +17,17 @@ function chooseFood(food) {
     }
 }
 
-function soldOut() {
-    console.log("soldOut");
-    if (food.quantity < 0) {
-        console.log("SOLD OUT. Please make another selection.");
-    }
-}
-
 function insertCoin(coin) {
-    if (coin === 25 || coin === 10 || coin === 5) {
-        total = total -= coin;
-        acceptedCoins.push(coin);
-        console.log(acceptedCoins);
-        metTotal();
-    } else {
-        console.log("Please enter a valid coin.");
+    checkSelection();
+    if (total > 0) {
+        if (coin === 25 || coin === 10 || coin === 5) {
+            total = total -= coin;
+            acceptedCoins.push(coin);
+            console.log(acceptedCoins);
+            metTotal();
+        } else {
+            console.log("Please enter a valid coin. Here is your coin back.");
+        }
     }
 }
 
@@ -40,7 +36,7 @@ function metTotal() {
         console.log("You still owe: " + total);
     } else if (total < 0) {
         total = Math.abs(total);
-        console.log("Here is your change: " + total);
+        console.log("Thank you! Enjoy your snack! Here is your change: " + total);
         acceptedCoins = [];
         total = 0;
     } else {
@@ -64,6 +60,12 @@ function returnCoins() {
     }
 }
 
+function checkSelection() {
+    if (total === 0) {
+        console.log("Please make a selection first. Here is your coin back.");
+    }
+}
+
 chooseFood(food[2]);
 chooseFood(food[1]);
 
@@ -72,10 +74,18 @@ insertCoin(10);
 insertCoin(5);
 insertCoin(1);
 insertCoin(25);
+
+chooseFood(food[1]);
 insertCoin(25);
+insertCoin(10);
 
 returnCoins();
 
 chooseFood(food[0]);
 
 insertCoin(5);
+insertCoin(25);
+insertCoin(25);
+insertCoin(25);
+insertCoin(10);
+insertCoin(10);
