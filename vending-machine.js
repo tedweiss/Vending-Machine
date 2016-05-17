@@ -11,6 +11,7 @@ function chooseFood(food) {
     if (food.quantity <= 0) {
         console.log(food.type + " is SOLD OUT. Please make another selection.");
     } else {
+    	selectedFood = [];
         selectedFood.push(food);
         console.log(selectedFood[0].type + " was selected");
         console.log("There are " + food.quantity + " " + food.type + " left.");
