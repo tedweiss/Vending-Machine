@@ -10,7 +10,7 @@ var food = [
 function chooseFood(food) {
     if (food.quantity <= 0) {
         console.log(food.type + " is SOLD OUT. Please make another selection.");
-    } else {
+    } else if(selectedFood.length <= 0 || (selectedFood.length === 1 && acceptedCoins.length <= 0)) {
         selectedFood = [];
         selectedFood.push(food);
         var foodPrice = food.price;
@@ -19,6 +19,8 @@ function chooseFood(food) {
         console.log("There are " + food.quantity + " " + food.type + " left.");
         console.log("You chose " + food.type + " and you owe $" + foodPrice);
         total = food.price;
+    } else {
+      console.log("You've chosen " + selectedFood[0].type + ". Press Return Coins to make another selection.");
     }
 }
 
