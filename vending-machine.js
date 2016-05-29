@@ -55,7 +55,7 @@ function metTotal() {
         console.log("You still owe: $" + total);
     } else if (total < 0) {
         total = Math.abs(total);
-        console.log("Thank you! Enjoy your snack! Here is your change: $" + total);
+        console.log("Thank you! Enjoy your snack! Here is your change: $" + total.toFixed(2));
         checkSelectedFood();
         selectedFood = [];
         acceptedCoins = [];
