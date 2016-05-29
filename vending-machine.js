@@ -14,6 +14,9 @@ var money = [
     { coin: "penny", value: 0.01, quantity: 5 }
 ];
 
+var displayMessage = document.getElementById("display-message");
+var displayTotal = document.getElementById("display-total");
+
 // Create Vending Machine 
 
 var machine = document.getElementById("vending-machine");
@@ -56,6 +59,9 @@ createAllowance();
 function chooseFood(food) {
     if (food.quantity <= 0) {
         console.log(food.type + " is SOLD OUT. Please make another selection.");
+        returnCoins();
+        displayMessage.innerHTML = "<p>" + food.type + " is SOLD OUT. Please make another selection.</p>";
+        displayTotal.innerHTML = "<p>INSERT COIN</p>";
     } else if (selectedFood.length <= 0 || (selectedFood.length === 1 && acceptedCoins <= 0)) {
         selectedFood = [];
         selectedFood.push(food);
@@ -64,9 +70,12 @@ function chooseFood(food) {
         console.log(selectedFood[0].type + " was selected");
         console.log("There are " + food.quantity + " " + food.type + " left.");
         console.log("You chose " + food.type + " and you owe $" + foodPrice);
+        displayMessage.innerHTML = "<p>You chose " + food.type + " and you owe:</p>";
         total = food.price;
+        displayTotal.innerHTML = "<p>$ " + total.toFixed(2) + "</p>";
     } else {
         console.log("You've chosen " + selectedFood[0].type + ". Press Return Coins to make another selection.");
+        displayMessage.innerHTML = "<p>You've chosen " + selectedFood[0].type + ". Press Return Coins to make another selection.</p>";
     }
 }
 
@@ -89,9 +98,11 @@ function insertCoin(coin) {
             coin = coin.toFixed(2);
             acceptedCoins.push(coin);
             console.log(acceptedCoins);
+            displayTotal.innerHTML = "<p>$ " + total + "</p>";
             metTotal();
         } else {
             console.log("Please enter a valid coin. Here is your coin back.");
+            displayMessage.innerHTML = "<p>Please enter a valid coin. Here is your coin back.</p>";
         }
     }
 }
@@ -102,12 +113,16 @@ function metTotal() {
     } else if (total < 0) {
         total = Math.abs(total);
         console.log("Thank you! Enjoy your snack! Here is your change: $" + total.toFixed(2));
+        displayMessage.innerHTML = "<p>Thank you! Enjoy your snack! Here is your change.</p>";
+        displayTotal.innerHTML = "<p>INSERT COIN</p>";
         checkSelectedFood();
         selectedFood = [];
         acceptedCoins = [];
         total = 0;
     } else {
         console.log("Thank you! Enjoy your snack!");
+        displayMessage.innerHTML = "<p>Thank you! Enjoy your snack!</p>";
+        displayTotal.innerHTML = "<p>INSERT COIN</p>";
         checkSelectedFood();
         selectedFood = [];
     }
@@ -125,6 +140,8 @@ function returnCoins() {
         acceptedCoins = [];
         total = 0;
         console.log("Please make a selection.");
+        displayMessage.innerHTML = "<p>Please make a selection.</p>";
+        displayTotal.innerHTML = "<p>INSERT COIN</p>";
         console.log("INSERT COIN");
     }
 }
@@ -132,6 +149,6 @@ function returnCoins() {
 function checkSelection() {
     if (total === 0) {
         console.log("Please make a selection first. Here is your coin back.");
+        displayMessage.innerHTML = "<p>Please make a selection first. Here is your coin back.</p>";
     }
 }
-

@@ -9,9 +9,21 @@
 </head>
 
 <body>
-    <div id="vending-machine"></div>
+    <div id="vending-machine-container">
+        <div id="vending-machine"></div>
+        <div>
+            <div id="display-message">
+                <p id="display-message-child">Make a Selection</p>
+            </div>
+            <div id="display-total">
+                <p>INSERT COIN</p>
+            </div>
+            <div id="return-coins" onclick="returnCoins()">
+            	<p>Return Coins</p>
+        	</div>
+        </div>
+    </div>
     <div id="money"></div>
-    <div id="return-coins" onclick="returnCoins()">Return Coins</div>
     <script type="text/javascript" src="vending-machine.js"></script>
 </body>
 

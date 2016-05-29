@@ -1,3 +1,8 @@
+#vending-machine-container>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
 #vending-machine>div {
     display: inline-block;
 }
