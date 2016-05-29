@@ -1,0 +1,13 @@
+#vending-machine>div {
+    display: inline-block;
+}
+
+.food {
+    border: 1px solid black;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    display: inline-block;
+    margin: 2%;
+    cursor: pointer;
+}

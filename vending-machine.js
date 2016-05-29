@@ -4,8 +4,29 @@ var selectedFood = [];
 var food = [
     { type: "cola", price: 1.00, quantity: 2 },
     { type: "chips", price: 0.50, quantity: 5 },
+    { type: "water", price: 0.75, quantity: 1 },
     { type: "candy", price: 0.65, quantity: 0 }
 ];
+
+// Create Vending Machine 
+
+var machine = document.getElementById("vending-machine");
+
+function createVendingMachine() {
+    for (i = 0; i < food.length; i++) {
+        var element = document.createElement('div');
+        element.id = "food-" + i;
+        element.className = "food";
+        var foodPrice = food[i].price;
+        foodPrice = foodPrice.toFixed(2);
+        element.innerHTML = "<p>" + food[i].type + "</p>";
+        element.innerHTML += "<p>$" + foodPrice + "</p>";
+        element.setAttribute("onclick", "chooseFood(food[" + i + "]);");
+        machine.appendChild(element);
+    }
+}
+
+createVendingMachine();
 
 function chooseFood(food) {
     if (food.quantity <= 0) {
