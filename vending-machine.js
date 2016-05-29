@@ -56,7 +56,7 @@ createAllowance();
 function chooseFood(food) {
     if (food.quantity <= 0) {
         console.log(food.type + " is SOLD OUT. Please make another selection.");
-    } else if (selectedFood.length <= 0 || (selectedFood.length === 1 && acceptedCoins.length <= 0)) {
+    } else if (selectedFood.length <= 0 || (selectedFood.length === 1 && acceptedCoins <= 0)) {
         selectedFood = [];
         selectedFood.push(food);
         var foodPrice = food.price;
@@ -119,9 +119,7 @@ function returnCoins() {
     } else {
         console.log("Returning Coins");
         for (i = 0; i < acceptedCoins.length; i++) {
-            var returnedCoin = acceptedCoins[i];
-            returnedCoin = returnedCoin.toFixed(2);
-            console.log("Here is your coin back: $" + returnedCoin);
+            console.log("Here is your coin back: $" + acceptedCoins[i]);
         }
         selectedFood = [];
         acceptedCoins = [];
@@ -137,33 +135,3 @@ function checkSelection() {
     }
 }
 
-chooseFood(food[2]);
-chooseFood(food[1]);
-
-insertCoin(0.10);
-insertCoin(0.01);
-insertCoin(0.05);
-insertCoin(0.25);
-insertCoin(0.25);
-
-chooseFood(food[1]);
-insertCoin(0.25);
-insertCoin(0.10);
-
-returnCoins();
-
-chooseFood(food[1]);
-
-insertCoin(0.05);
-insertCoin(0.25);
-insertCoin(0.25);
-insertCoin(0.25);
-
-chooseFood(food[0]);
-
-insertCoin(0.10);
-insertCoin(0.10);
-insertCoin(0.05);
-insertCoin(0.25);
-insertCoin(0.25);
-insertCoin(0.25);
