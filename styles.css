@@ -11,3 +11,30 @@
     margin: 2%;
     cursor: pointer;
 }
+.coin-div {
+    display: inline-block;
+    text-align: center;
+    margin: 0 2%;
+}
+
+.coin-div p:first-child {
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.quarter {
+    padding: 30px 21px;
+}
+
+.dime {
+    padding: 16px 7px;
+}
+
+.nickel {
+    padding: 24px 15px;
+}
+
+.penny {
+    padding: 20px 11px;
+}

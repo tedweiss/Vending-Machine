@@ -7,6 +7,12 @@ var food = [
     { type: "water", price: 0.75, quantity: 1 },
     { type: "candy", price: 0.65, quantity: 0 }
 ];
+var money = [
+    { coin: "quarter", value: 0.25, quantity: 4 },
+    { coin: "dime", value: 0.10, quantity: 6 },
+    { coin: "nickel", value: 0.05, quantity: 7 },
+    { coin: "penny", value: 0.01, quantity: 5 }
+];
 
 // Create Vending Machine 
 
@@ -27,6 +33,25 @@ function createVendingMachine() {
 }
 
 createVendingMachine();
+
+// Create Allowance
+
+var bank = document.getElementById("money");
+
+function createAllowance() {
+    for (i = 0; i < money.length; i++) {
+        var element = document.createElement("div");
+        element.id = "money-" + money[i].coin;
+        element.className = "coin-div";
+        var moneyFixed = money[i].value;
+        element.innerHTML = "<p class='" + money[i].coin + "' onclick='insertCoin(" + money[i].value + ")'>$" + moneyFixed.toFixed(2) + "</p>";
+        element.innerHTML += "<p>" + money[i].quantity + "</p>";
+        bank.appendChild(element);
+
+    }
+}
+
+createAllowance();
 
 function chooseFood(food) {
     if (food.quantity <= 0) {
