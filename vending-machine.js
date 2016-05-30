@@ -124,6 +124,8 @@ function insertCoin(coin) {
             console.log(acceptedCoins);
             displayTotal.innerHTML = "<p>$ " + total + "</p>";
             metTotal();
+            allowance = 0;
+            calculateAllowance();
         } else {
             console.log("Please enter a valid coin. Here is your coin back.");
             displayMessage.innerHTML = "<p>Please enter a valid coin. Here is your coin back.</p>";
