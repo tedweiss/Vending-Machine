@@ -3,8 +3,26 @@
 	vertical-align: top;
 }
 
+#vending-machine, #money {
+	width: 600px;
+	text-align: center;
+}
+
 #vending-machine>div {
     display: inline-block;
+}
+
+#money-container {
+	display: flex;
+	margin-top: 30px;
+}
+
+#money-container>div {
+	vertical-align: middle;
+}
+
+#display-allowance {
+	order: 1;
 }
 
 #return-coins {

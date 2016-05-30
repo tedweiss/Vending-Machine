@@ -17,6 +17,11 @@ var money = [
 var displayMessage = document.getElementById("display-message");
 var displayTotal = document.getElementById("display-total");
 
+var quarterId = document.getElementById("quarterId");
+var dimeId = document.getElementById("dimeId");
+var nickelId = document.getElementById("nickelId");
+var pennyId = document.getElementById("pennyId");
+
 // Create Vending Machine 
 
 var machine = document.getElementById("vending-machine");
@@ -39,22 +44,40 @@ createVendingMachine();
 
 // Create Allowance
 
+var bankContainer = document.getElementById("money-container");
 var bank = document.getElementById("money");
 
 function createAllowance() {
+    var bank = document.createElement("div");
+    bank.id = "money";
+    bankContainer.appendChild(bank);
     for (i = 0; i < money.length; i++) {
         var element = document.createElement("div");
         element.id = "money-" + money[i].coin;
         element.className = "coin-div";
         var moneyFixed = money[i].value;
         element.innerHTML = "<p class='" + money[i].coin + "' onclick='insertCoin(" + money[i].value + ")'>$" + moneyFixed.toFixed(2) + "</p>";
-        element.innerHTML += "<p>" + money[i].quantity + "</p>";
+        element.innerHTML += "<p id='" + money[i].coin + "Id'>" + money[i].quantity + "</p>";
         bank.appendChild(element);
-
     }
 }
 
 createAllowance();
+
+// Display Allowance
+
+var displayAllowance = document.getElementById("display-allowance");
+var allowance = 0;
+
+function calculateAllowance() {
+    for (i = 0; i < money.length; i++) {
+        allowance += money[i].value * money[i].quantity;
+    }
+    console.log(allowance.toFixed(2));
+    displayAllowance.innerHTML = "<p>$" + allowance.toFixed(2) + "</p>";
+}
+
+calculateAllowance();
 
 function chooseFood(food) {
     if (food.quantity <= 0) {
@@ -93,6 +116,7 @@ function insertCoin(coin) {
     checkSelection();
     if (total > 0) {
         if (coin === 0.25 || coin === 0.10 || coin === 0.05) {
+            findCoin(coin);
             total = total -= coin;
             total = total.toFixed(2);
             coin = coin.toFixed(2);
@@ -103,6 +127,22 @@ function insertCoin(coin) {
         } else {
             console.log("Please enter a valid coin. Here is your coin back.");
             displayMessage.innerHTML = "<p>Please enter a valid coin. Here is your coin back.</p>";
+        }
+    }
+}
+
+function findCoin(coin) {
+    console.log(bankContainer);
+    for (i = 0; i < money.length; i++) {
+        if (coin === money[i].value) {
+            money[i].quantity = money[i].quantity - 1;
+            console.log("coin: " + coin);
+            console.log(money[i].coin + ": " + money[i].quantity);
+            coinId = money[i].coin + "Id";
+            var bank = document.getElementById("money");
+            bank.parentNode.removeChild(bank);
+            coinId.innerHTML = money[i].quantity;
+            createAllowance();
         }
     }
 }
