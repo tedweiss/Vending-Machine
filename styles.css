@@ -3,7 +3,7 @@
 	vertical-align: top;
 }
 
-#vending-machine, #money {
+#vending-machine, #money, #display-allowance-message {
 	width: 600px;
 	text-align: center;
 }

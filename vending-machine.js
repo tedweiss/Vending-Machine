@@ -8,7 +8,7 @@ var food = [
     { type: "candy", price: 0.65, quantity: 0 }
 ];
 var money = [
-    { coin: "quarter", value: 0.25, quantity: 4 },
+    { coin: "quarter", value: 0.25, quantity: 2 },
     { coin: "dime", value: 0.10, quantity: 6 },
     { coin: "nickel", value: 0.05, quantity: 7 },
     { coin: "penny", value: 0.01, quantity: 5 }
@@ -74,7 +74,7 @@ function calculateAllowance() {
         allowance += money[i].value * money[i].quantity;
     }
     console.log(allowance.toFixed(2));
-    displayAllowance.innerHTML = "<p>$" + allowance.toFixed(2) + "</p>";
+    displayAllowance.innerHTML = "<p>Amount Left</p><p>$ " + allowance.toFixed(2) + "</p>";
 }
 
 calculateAllowance();
@@ -113,8 +113,9 @@ function checkSelectedFood() {
 }
 
 function insertCoin(coin) {
-    checkSelection();
-    if (total > 0) {
+    // checkCoin(coin);
+    // checkSelection();
+    if (checkCoin(coin) === true && checkSelection() === true) {
         if (coin === 0.25 || coin === 0.10 || coin === 0.05) {
             findCoin(coin);
             total = total -= coin;
@@ -134,7 +135,6 @@ function insertCoin(coin) {
 }
 
 function findCoin(coin) {
-    console.log(bankContainer);
     for (i = 0; i < money.length; i++) {
         if (coin === money[i].value) {
             money[i].quantity = money[i].quantity - 1;
@@ -149,6 +149,21 @@ function findCoin(coin) {
     }
 }
 
+var displayAllowanceMessage = document.getElementById("display-allowance-message");
+
+function checkCoin(coin) {
+    for (i = 0; i < money.length; i++) {
+        if (money[i].quantity <= 0 && money[i].value === coin) {
+            var displayAllowanceMessage = document.getElementById("display-allowance-message");
+            displayAllowanceMessage.innerHTML = "<p>Sorry, you don't have anymore " + money[i].coin + "s.</p>";
+            return false;
+        }
+    }
+    var displayAllowanceMessage = document.getElementById("display-allowance-message");
+    displayAllowanceMessage.innerHTML = "<p></p>";
+    return true;
+}
+
 function metTotal() {
     if (total > 0) {
         console.log("You still owe: $" + total);
@@ -161,6 +176,7 @@ function metTotal() {
         selectedFood = [];
         acceptedCoins = [];
         total = 0;
+        console.log("selectedFood" + selectedFood);
     } else {
         console.log("Thank you! Enjoy your snack!");
         displayMessage.innerHTML = "<p>Thank you! Enjoy your snack!</p>";
@@ -189,8 +205,10 @@ function returnCoins() {
 }
 
 function checkSelection() {
-    if (total === 0) {
+    if (selectedFood.length === 0) {
         console.log("Please make a selection first. Here is your coin back.");
         displayMessage.innerHTML = "<p>Please make a selection first. Here is your coin back.</p>";
+        return false;
     }
+    return true;
 }
