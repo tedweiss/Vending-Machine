@@ -8,9 +8,9 @@ var food = [
     { type: "candy", price: 0.65, quantity: 0 }
 ];
 var money = [
-    { coin: "quarter", value: 0.25, quantity: 2 },
-    { coin: "dime", value: 0.10, quantity: 6 },
-    { coin: "nickel", value: 0.05, quantity: 7 },
+    { coin: "quarter", value: 0.25, quantity: 3 },
+    { coin: "dime", value: 0.10, quantity: 7 },
+    { coin: "nickel", value: 0.05, quantity: 10 },
     { coin: "penny", value: 0.01, quantity: 5 }
 ];
 
@@ -113,8 +113,6 @@ function checkSelectedFood() {
 }
 
 function insertCoin(coin) {
-    // checkCoin(coin);
-    // checkSelection();
     if (checkCoin(coin) === true && checkSelection() === true) {
         if (coin === 0.25 || coin === 0.10 || coin === 0.05) {
             findCoin(coin);
@@ -191,9 +189,12 @@ function returnCoins() {
         console.log("INSERT COIN");
     } else {
         console.log("Returning Coins");
-        for (i = 0; i < acceptedCoins.length; i++) {
-            console.log("Here is your coin back: $" + acceptedCoins[i]);
-        }
+        checkReturnCoins();
+        allowance = 0;
+            var bank = document.getElementById("money");
+            bank.parentNode.removeChild(bank);
+        createAllowance();
+        calculateAllowance();
         selectedFood = [];
         acceptedCoins = [];
         total = 0;
@@ -211,4 +212,15 @@ function checkSelection() {
         return false;
     }
     return true;
+}
+
+function checkReturnCoins() {
+    for (j = 0; j < money.length; j++) {
+        for (i = 0; i < acceptedCoins.length; i++) {
+            if (money[j].value == acceptedCoins[i]) {
+                console.log("Here is your coin back: $" + acceptedCoins[i]);
+                money[j].quantity = money[j].quantity + 1;
+            }
+        }
+    }
 }
