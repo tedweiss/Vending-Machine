@@ -167,32 +167,35 @@ function metTotal() {
         console.log("You still owe: $" + total);
     } else if (total < 0) {
         total = Math.abs(total);
-        console.log("Thank you! Enjoy your snack! Here is your change: $" + total.toFixed(2));
-        displayMessage.innerHTML = "<p>Thank you! Enjoy your snack! Here is your change.</p>";
+        console.log("Thank you! Enjoy your " + selectedFood[0].type + "! Here is your change: $" + total.toFixed(2));
+        displayMessage.innerHTML = "<p>Thank you! Enjoy your " + selectedFood[0].type + "! Here is your change.</p>";
         displayTotal.innerHTML = "<p>INSERT COIN</p>";
         checkSelectedFood();
         selectedFood = [];
         acceptedCoins = [];
         total = 0;
-        console.log("selectedFood" + selectedFood);
     } else {
-        console.log("Thank you! Enjoy your snack!");
-        displayMessage.innerHTML = "<p>Thank you! Enjoy your snack!</p>";
+        console.log("Thank you! Enjoy your " + selectedFood[0].type + "!");
+        displayMessage.innerHTML = "<p>Thank you! Enjoy your " + selectedFood[0].type + "!</p>";
         displayTotal.innerHTML = "<p>INSERT COIN</p>";
         checkSelectedFood();
         selectedFood = [];
+        acceptedCoins = [];
+        total = 0;
     }
 }
 
 function returnCoins() {
-    if (acceptedCoins === []) {
+    if (acceptedCoins.length === 0) {
         console.log("INSERT COIN");
+        displayMessage.innerHTML = "<p>Please make a selection.</p>";
+        displayTotal.innerHTML = "<p>INSERT COIN</p>";
     } else {
         console.log("Returning Coins");
         checkReturnCoins();
         allowance = 0;
-            var bank = document.getElementById("money");
-            bank.parentNode.removeChild(bank);
+        var bank = document.getElementById("money");
+        bank.parentNode.removeChild(bank);
         createAllowance();
         calculateAllowance();
         selectedFood = [];
