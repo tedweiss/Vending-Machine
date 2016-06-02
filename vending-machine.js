@@ -170,6 +170,11 @@ function metTotal() {
         console.log("Thank you! Enjoy your " + selectedFood[0].type + "! Here is your change: $" + total.toFixed(2));
         displayMessage.innerHTML = "<p>Thank you! Enjoy your " + selectedFood[0].type + "! Here is your change.</p>";
         displayTotal.innerHTML = "<p>INSERT COIN</p>";
+        giveChange();
+        var bank = document.getElementById("money");
+        bank.parentNode.removeChild(bank);
+        createAllowance();
+        calculateAllowance();
         checkSelectedFood();
         selectedFood = [];
         acceptedCoins = [];
@@ -223,6 +228,24 @@ function checkReturnCoins() {
             if (money[j].value == acceptedCoins[i]) {
                 console.log("Here is your coin back: $" + acceptedCoins[i]);
                 money[j].quantity = money[j].quantity + 1;
+            }
+        }
+    }
+}
+
+function giveChange() {
+    for(i=0; i<money.length; i++) {
+        if(total === 0.20 && money[i].value === 0.10) {
+                money[j].quantity = money[j].quantity + 2;
+        } else if (total === 0.15) {
+            if (money[i].value === 0.10) {
+                money[i].quantity = money[i].quantity + 1;
+            } else if (money[i].value === 0.05) {
+                money[i].quantity = money[i].quantity + 1;                
+            }
+        } else if(total === 0.05) {
+            if (money[i].value === 0.05) {
+                money[i].quantity = money[i].quantity + 1;                
             }
         }
     }
