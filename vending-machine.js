@@ -171,10 +171,7 @@ function metTotal() {
         displayMessage.innerHTML = "<p>Thank you! Enjoy your " + selectedFood[0].type + "! Here is your change.</p>";
         displayTotal.innerHTML = "<p>INSERT COIN</p>";
         giveChange();
-        var bank = document.getElementById("money");
-        bank.parentNode.removeChild(bank);
-        createAllowance();
-        calculateAllowance();
+        updateBank();
         checkSelectedFood();
         selectedFood = [];
         acceptedCoins = [];
@@ -199,10 +196,7 @@ function returnCoins() {
         console.log("Returning Coins");
         checkReturnCoins();
         allowance = 0;
-        var bank = document.getElementById("money");
-        bank.parentNode.removeChild(bank);
-        createAllowance();
-        calculateAllowance();
+        updateBank();
         selectedFood = [];
         acceptedCoins = [];
         total = 0;
@@ -234,19 +228,26 @@ function checkReturnCoins() {
 }
 
 function giveChange() {
-    for(i=0; i<money.length; i++) {
-        if(total === 0.20 && money[i].value === 0.10) {
-                money[j].quantity = money[j].quantity + 2;
+    for (i = 0; i < money.length; i++) {
+        if (total === 0.20 && money[i].value === 0.10) {
+            money[j].quantity = money[j].quantity + 2;
         } else if (total === 0.15) {
             if (money[i].value === 0.10) {
                 money[i].quantity = money[i].quantity + 1;
             } else if (money[i].value === 0.05) {
-                money[i].quantity = money[i].quantity + 1;                
+                money[i].quantity = money[i].quantity + 1;
             }
-        } else if(total === 0.05) {
+        } else if (total === 0.05) {
             if (money[i].value === 0.05) {
-                money[i].quantity = money[i].quantity + 1;                
+                money[i].quantity = money[i].quantity + 1;
             }
         }
     }
+}
+
+function updateBank() {
+    var bank = document.getElementById("money");
+    bank.parentNode.removeChild(bank);
+    createAllowance();
+    calculateAllowance();
 }
