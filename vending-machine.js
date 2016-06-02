@@ -237,6 +237,10 @@ function giveChange() {
             } else if (money[i].value === 0.05) {
                 money[i].quantity = money[i].quantity + 1;
             }
+        } else if (total === 0.10) {
+            if (money[i].value === 0.10) {
+                money[i].quantity = money[i].quantity + 1;
+            }
         } else if (total === 0.05) {
             if (money[i].value === 0.05) {
                 money[i].quantity = money[i].quantity + 1;
