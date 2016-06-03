@@ -1,33 +1,50 @@
 var total = 0;
 var acceptedCoins = [];
 var selectedFood = [];
-var food = [
-    { type: "cola", price: 1.00, quantity: 2 },
-    { type: "chips", price: 0.50, quantity: 5 },
-    { type: "water", price: 0.75, quantity: 1 },
-    { type: "candy", price: 0.65, quantity: 0 }
-];
-var money = [
-    { coin: "quarter", value: 0.25, quantity: 3 },
-    { coin: "dime", value: 0.10, quantity: 7 },
-    { coin: "nickel", value: 0.05, quantity: 10 },
-    { coin: "penny", value: 0.01, quantity: 5 }
-];
+var food = [{
+    type: "cola",
+    price: 1.00,
+    quantity: 2
+}, {
+    type: "chips",
+    price: 0.50,
+    quantity: 5
+}, {
+    type: "water",
+    price: 0.75,
+    quantity: 1
+}, {
+    type: "candy",
+    price: 0.65,
+    quantity: 0
+}];
+var money = [{
+    coin: "quarter",
+    value: 0.25,
+    quantity: 3
+}, {
+    coin: "dime",
+    value: 0.10,
+    quantity: 7
+}, {
+    coin: "nickel",
+    value: 0.05,
+    quantity: 10
+}, {
+    coin: "penny",
+    value: 0.01,
+    quantity: 5
+}];
 
 var displayMessage = document.getElementById("display-message");
 var displayTotal = document.getElementById("display-total");
 
-var quarterId = document.getElementById("quarterId");
-var dimeId = document.getElementById("dimeId");
-var nickelId = document.getElementById("nickelId");
-var pennyId = document.getElementById("pennyId");
-
-// Create Vending Machine 
+// Create Vending Machine
 
 var machine = document.getElementById("vending-machine");
 
 function createVendingMachine() {
-    for (i = 0; i < food.length; i++) {
+    for (var i = 0; i < food.length; i++) {
         var element = document.createElement('div');
         element.id = "food-" + i;
         element.className = "food";
@@ -51,7 +68,7 @@ function createAllowance() {
     var bank = document.createElement("div");
     bank.id = "money";
     bankContainer.appendChild(bank);
-    for (i = 0; i < money.length; i++) {
+    for (var i = 0; i < money.length; i++) {
         var element = document.createElement("div");
         element.id = "money-" + money[i].coin;
         element.className = "coin-div";
@@ -70,7 +87,7 @@ var displayAllowance = document.getElementById("display-allowance");
 var allowance = 0;
 
 function calculateAllowance() {
-    for (i = 0; i < money.length; i++) {
+    for (var i = 0; i < money.length; i++) {
         allowance += money[i].value * money[i].quantity;
     }
     console.log(allowance.toFixed(2));
@@ -103,7 +120,7 @@ function chooseFood(food) {
 }
 
 function checkSelectedFood() {
-    for (i = 0; i < food.length; i++) {
+    for (var i = 0; i < food.length; i++) {
         if (selectedFood[0] === food[i]) {
             console.log(selectedFood[0].type + " and " + food[i].type + " match");
             food[i].quantity = food[i].quantity - 1;
@@ -133,15 +150,13 @@ function insertCoin(coin) {
 }
 
 function findCoin(coin) {
-    for (i = 0; i < money.length; i++) {
+    for (var i = 0; i < money.length; i++) {
         if (coin === money[i].value) {
             money[i].quantity = money[i].quantity - 1;
             console.log("coin: " + coin);
             console.log(money[i].coin + ": " + money[i].quantity);
-            coinId = money[i].coin + "Id";
             var bank = document.getElementById("money");
             bank.parentNode.removeChild(bank);
-            coinId.innerHTML = money[i].quantity;
             createAllowance();
         }
     }
@@ -150,7 +165,7 @@ function findCoin(coin) {
 var displayAllowanceMessage = document.getElementById("display-allowance-message");
 
 function checkCoin(coin) {
-    for (i = 0; i < money.length; i++) {
+    for (var i = 0; i < money.length; i++) {
         if (money[i].quantity <= 0 && money[i].value === coin) {
             var displayAllowanceMessage = document.getElementById("display-allowance-message");
             displayAllowanceMessage.innerHTML = "<p>Sorry, you don't have anymore " + money[i].coin + "s.</p>";
@@ -217,8 +232,8 @@ function checkSelection() {
 }
 
 function checkReturnCoins() {
-    for (j = 0; j < money.length; j++) {
-        for (i = 0; i < acceptedCoins.length; i++) {
+    for (var j = 0; j < money.length; j++) {
+        for (var i = 0; i < acceptedCoins.length; i++) {
             if (money[j].value == acceptedCoins[i]) {
                 console.log("Here is your coin back: $" + acceptedCoins[i]);
                 money[j].quantity = money[j].quantity + 1;
@@ -228,7 +243,7 @@ function checkReturnCoins() {
 }
 
 function giveChange() {
-    for (i = 0; i < money.length; i++) {
+    for (var i = 0; i < money.length; i++) {
         if (total === 0.20 && money[i].value === 0.10) {
             money[j].quantity = money[j].quantity + 2;
         } else if (total === 0.15) {
